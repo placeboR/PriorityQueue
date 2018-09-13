@@ -81,9 +81,16 @@ int PQ_insert(PrioQ *PQ, double key, void *data){
                 }
                 /* case 3: insert at the end of the priority queue */
                 if (p1->next == NULL) {
-                    new->next = NULL;
-                    p1->next = new;
-                    PQ->tail = new;
+                    if (p1->key <= new->key) {
+                        new->next = NULL;
+                        p1->next = new;
+                        PQ->tail = new;
+                    }
+                    else{
+                        new->next = p1;
+                        p2->next = new;
+                    }
+                    
                 }
                 /* case 4: insert at the middle of the priority queue */
                 else{
